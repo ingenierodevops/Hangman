@@ -4,14 +4,16 @@ from random import choice
 word_list = ('python', 'java', 'kotlin', 'javascript')
 
 welcome_text= """H A N G M A N
-Guess the word: """
+Guess the word """
 
-print(welcome_text)
-
-
-user_word = input()
 
 #word = "python"
 word = choice(word_list)
+word_end = "-" * (len(word) - 3)
+print(welcome_text + word[:3] + word_end + ":")
+
+user_word = input()
+
+
 
 print("You survived!" if user_word == word else "You lost!")
