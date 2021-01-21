@@ -1,4 +1,5 @@
 from random import choice
+import string
 
 # Write your code here
 word_list = ('python', 'java', 'kotlin', 'javascript')
@@ -13,6 +14,8 @@ greeting = """Thanks for playing!
 We'll see how well you did in the next stage"""
 no_avances = "No improvements"
 
+ya_intentada = "You've already guessed this letter"
+
 #word = "python"
 word = choice(word_list)
 word_letters = set(word)
@@ -26,6 +29,8 @@ letras_intentadas = []
 
 #print(welcome_text + word[:3] + word_end + ":")
 
+letras_alfabeto_list = list(string.ascii_lowercase)
+
 print(welcome_text)
 print()
 
@@ -37,30 +42,44 @@ while intentos > 0:
 #    print("Input a letter: ")
     print('Input a letter: ', end="")
     user_letter = input()
-    if user_letter in letras_intentadas and user_letter in word_letters:
-        print(no_avances)
-        intentos -= 1
-        if intentos != 0 :
-            print()
+    if len(user_letter) > 1:
+        print("You should input a single letter")
+        print()
         continue
     else:
-        letras_intentadas.append(user_letter)
-
-    if user_letter in word_letters:
-        #contenida
-        indice = 0
-        for letra in word_letters_list:
-            if letra == user_letter:
-                palabra_adivinada_list[indice] = user_letter
-                # print("adivinada")
-                # print(palabra_adivinada_list)
-                palabra_adivinada = "".join(palabra_adivinada_list)
-            indice += 1
-    else:
-        #no contenida
-        print(not_in_word)
-        intentos -= 1
-    if intentos != 0 :
+        if user_letter not in letras_alfabeto_list:
+            print("Please enter a lowercase English letter")
+            print()
+            continue
+        else:
+            if user_letter in letras_intentadas and user_letter in word_letters:
+                print(no_avances)
+                #print(ya_intentada)
+              #  if user_letter not in word:
+                intentos -= 1
+                if intentos != 0:
+                    print()
+                continue
+            else:
+                letras_intentadas.append(user_letter)
+                if user_letter in word_letters:
+                    #contenida
+                    indice = 0
+                    for letra in word_letters_list:
+                        if letra == user_letter:
+                            palabra_adivinada_list[indice] = user_letter
+                            # print("adivinada")
+                            # print(palabra_adivinada_list)
+                            palabra_adivinada = "".join(palabra_adivinada_list)
+                            letras_intentadas.append(user_letter)
+                        indice += 1
+                    if palabra_adivinada == word:
+                        break
+                else:
+                    #no contenida
+                    print(not_in_word)
+                    intentos -= 1
+    if intentos != 0:
         print()
 
 
@@ -68,7 +87,9 @@ while intentos > 0:
 # tries = set{}
 # attempts: tries.add(letra)
 
-guessed = """You guessed the word!
+guessed = "You guessed the word "
+guessed_end =""""!
 You survived!"""
-print(guessed if palabra_adivinada == word else "You lost!")
+
+print(guessed + word + guessed_end if palabra_adivinada == word else "You lost!")
 # print(greeting)
