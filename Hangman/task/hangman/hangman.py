@@ -52,14 +52,22 @@ while intentos > 0:
             print()
             continue
         else:
-            if user_letter in letras_intentadas and user_letter in word_letters:
-                print(no_avances)
-                #print(ya_intentada)
-              #  if user_letter not in word:
-                intentos -= 1
-                if intentos != 0:
-                    print()
-                continue
+            if user_letter in letras_intentadas:
+                if user_letter in word_letters:
+                    #print(no_avances)
+                    print(ya_intentada)
+                    #  if user_letter not in word:
+                    # intentos -= 1
+                    if intentos != 0:
+                        print()
+                    continue
+                else:
+                    print(ya_intentada)
+                    #print(not_in_word)
+                    # intentos -= 1
+                    if intentos != 0:
+                        print()
+                    continue
             else:
                 letras_intentadas.append(user_letter)
                 if user_letter in word_letters:
@@ -88,7 +96,7 @@ while intentos > 0:
 # attempts: tries.add(letra)
 
 guessed = "You guessed the word "
-guessed_end =""""!
+guessed_end ="""!
 You survived!"""
 
 print(guessed + word + guessed_end if palabra_adivinada == word else "You lost!")
